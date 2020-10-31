@@ -24,8 +24,8 @@ class inicio:
         self.btnreproducir.place(x=855, y=250)
         self.btnborrar = Button(self.ven, text="Borrar", font=("Console", 30), background="#FF4D00", command=self.borrar)
         self.btnborrar.place(x=210, y=250)
-        self.btnpegar = Button(self.ven, text="Pegar", font=("Console", 30), background="#FF4D00", command=self.segunda)
-        self.btnpegar.place(x=210, y=400)
+        self.btnpegar = Button(self.ven, text="Salir", font=("Console", 30), background="#FF4D00", command=self.salir)
+        self.btnpegar.place(x=225, y=400)
         self.btnsegunda = Button(self.ven, text="Voz a Texto", font=("Console", 30), background="#FF4D00", command=self.segunda)
         self.btnsegunda.place(x=855,y=400)
     
@@ -33,15 +33,10 @@ class inicio:
         
         self.lbl.place_forget()
         gta = gTTS(self.txt.get(), lang="es-us")
-        if os.path.isfile("prueba.mp3"):
-        
-            remove("prueba.mp3")
-        if os.path.isfile("prueba.mp3")==False:
-            gta.save("prueba.mp3")
-            playsound("prueba.mp3")
-        else:
-            gta.save("prueba.mp3")
-            playsound("prueba.mp3")
+        if os.path.isfile("text.mp3")==False:
+            gta.save("text.mp3")
+            playsound("text.mp3")
+            remove("text.mp3")
     
     def borrar(self):
         
@@ -50,6 +45,9 @@ class inicio:
             remove("prueba.mp3")
         else:
             self.lbl.place(x=350, y=600)
+
+    def salir(self):
+        self.ven.destroy()
     
     #Segunda Ventana
 
@@ -64,10 +62,10 @@ class inicio:
         #Button de voz a texto
         self.btngrabar = Button(self.ven2, text="Grabar Voz", font=("Console", 30), background="#FF4D00", command=self.grabar)
         self.btngrabar.place(x=850, y=250)
-        self.btnrepro = Button(self.ven2, text="Reproducir", font=("Console", 30), background="#FF4D00")
+        self.btnrepro = Button(self.ven2, text="Reproducir", font=("Console", 30), background="#FF4D00",command=self.reproducirtext)
         self.btnrepro.place(x=210, y=250)
-        self.btncopiar = Button(self.ven2, text="Copiar", font=("Console", 30), background="#FF4D00")
-        self.btncopiar.place(x=250, y=400)
+        self.btncopiar = Button(self.ven2, text="Salir", font=("Console", 30), background="#FF4D00",command=self.salir)
+        self.btncopiar.place(x=260, y=400)
         self.btnatras = Button(self.ven2,text="Atras", font=("Console", 30), background="#FF4D00", command=self.atras)
         self.btnatras.place(x=910, y=400)
     
@@ -85,6 +83,14 @@ class inicio:
 
     def atras(self):
         self.ven2.place_forget()
+    
+    def reproducirtext(self):
+        gta = gTTS(self.txt2.get(), lang="es-us")
+        if os.path.isfile("voz.mp3")==False:
+            gta.save("voz.mp3")
+            playsound("voz.mp3")
+            remove("voz.mp3")
+        
 
 
 
